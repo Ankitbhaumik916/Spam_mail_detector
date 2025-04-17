@@ -62,3 +62,15 @@ y_pred = perceptron.predict(X_test)
 # Accuracy
 accuracy = np.mean(y_pred == y_test)
 print(f"Accuracy: {accuracy * 100:.2f}%")
+
+# Function to predict a custom message
+def predict_message(message):
+    # Vectorize message using the same fitted vectorizer
+    message_vector = vectorizer.transform([message]).toarray()
+    prediction = perceptron.predict(message_vector)[0]
+    return "Spam" if prediction == 1 else "Not Spam"
+
+# Example usage
+user_input = input("Enter a message or email to check if it's spam: ")
+result = predict_message(user_input)
+print(f"\nPrediction: {result}")
